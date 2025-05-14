@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('title')->unique();
             $table->string('author');
-            $table->text('description');
-            $table->string('cover_image');
-            $table->string('available_copies');
+            $table->text('description')->nullable();
+            $table->string('cover_image')->nullable();
+            $table->string('available_copies')->nullable();
             $table->timestamps();
         });
     }
