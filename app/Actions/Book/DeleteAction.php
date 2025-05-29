@@ -3,6 +3,7 @@
 namespace App\Actions\Book;
 
 use App\Actions\Traits\CacheTrait;
+use App\Exceptions\ApiResponseException;
 use App\Models\Book;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -29,9 +30,7 @@ class DeleteAction
                 message: "$id - id li kita'p o'hirildi!"
             );
         } catch (ModelNotFoundException $e) {
-            // TODO ApiResponse jaratiw
-            throw new Exception("QATELIK");
-            // throw new ApiResponseException('Comment Not Found', 404);
+            throw new ApiResponseException("$id - id li kita'p bazada tabilmadi!", 404);
         }
     }
 }

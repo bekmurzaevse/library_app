@@ -4,6 +4,7 @@ namespace App\Actions\Book;
 
 
 use App\Dto\Book\UpdateDto;
+use App\Exceptions\ApiResponseException;
 use App\Models\Book;
 use App\Traits\ResponseTrait;
 use Exception;
@@ -33,9 +34,7 @@ class UpdateAction
                 message: "Kita'p jan'alandi!"
             );
         } catch (ModelNotFoundException $e) {
-            // TODO ApiResponse jaratiw
-            throw new Exception("Qatelik");
-            // throw new ApiResponseException("Category not found", 404);
+            throw new ApiResponseException("$id - id li kita'p bazada tabilmadi!", 404);
         }
     }
 }
