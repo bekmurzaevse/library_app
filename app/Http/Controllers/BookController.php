@@ -6,7 +6,9 @@ use App\Actions\Book\CreateAction;
 use App\Actions\Book\DeleteAction;
 use App\Actions\Book\IndexAction;
 use App\Actions\Book\ShowAction;
+use App\Actions\Book\UpdateAction;
 use App\Dto\Book\CreateDto;
+use App\Dto\Book\UpdateDto;
 use App\Http\Requests\Book\CreateRequest;
 use App\Http\Requests\Book\UpdateRequest;
 use Illuminate\Http\JsonResponse;
@@ -46,11 +48,11 @@ class BookController extends Controller
     }
 
 
-    public function update(UpdateRequest $request, int $id)
+    public function update(UpdateRequest $request, int $id, UpdateAction $action)
     {
-        dd($id);
+        // dd($id);
         // return $action($id, UpdateDto::from($request));
-        // return $action($id, UpdateDto::from($request));
+        return $action($id, UpdateDto::from($request));
     }
 
     /**

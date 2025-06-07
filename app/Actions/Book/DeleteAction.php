@@ -9,6 +9,7 @@ use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteAction
 {
@@ -24,6 +25,9 @@ class DeleteAction
     {
         try {
             $book = Book::findOrFail($id);
+            if (Storage::disk('public')->exists($book->cover_image)) {
+                Storage::disk('public')->delete($book->cover_image);
+            }
             $book->delete();
 
             return static::toResponse(
