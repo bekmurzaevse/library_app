@@ -3,6 +3,7 @@
 namespace App\Dto\Book;
 
 use App\Http\Requests\Book\UpdateRequest;
+use Illuminate\Http\UploadedFile;
 
 readonly class UpdateDto
 {
@@ -11,11 +12,16 @@ readonly class UpdateDto
         public string $title,
         public string $author,
         public ?string $description,
-        public ?string $cover_image,
-        public ?string $available_copies,
+        public UploadedFile $coverImage,
+        public int $available_copies,
     ) {
     }
 
+    /**
+     * Summary of from
+     * @param \App\Http\Requests\Book\UpdateRequest $request
+     * @return UpdateDto
+     */
     public static function from(UpdateRequest $request): self
     {
         return new self(
@@ -23,7 +29,7 @@ readonly class UpdateDto
             title: $request->get('title'),
             author: $request->get('author'),
             description: $request->get('description'),
-            cover_image: $request->get('cover_image'),
+            coverImage: $request->file('cover_image'),
             available_copies: $request->get('available_copies'),
         );
     }

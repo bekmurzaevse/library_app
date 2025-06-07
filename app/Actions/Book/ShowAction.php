@@ -3,6 +3,7 @@
 namespace App\Actions\Book;
 
 use App\Actions\Traits\CacheTrait;
+use App\Exceptions\ApiResponseException;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Traits\ResponseTrait;
@@ -14,6 +15,12 @@ class ShowAction
 {
     use ResponseTrait, CacheTrait;
 
+    /**
+     * Summary of __invoke
+     * @param int $id
+     * @throws \App\Exceptions\ApiResponseException
+     * @return JsonResponse
+     */
     public function __invoke(int $id): JsonResponse
     {
         try {
@@ -26,9 +33,7 @@ class ShowAction
                 data:  new BookResource($data),
             );
         } catch (ModelNotFoundException $ex) {
-            // TODO ApiResponse jaratriw
-            throw new Exception("QATELIK");
-            // throw new ApiResponseException('post not found', 404);
+            throw new ApiResponseException("$id - id li kita'p bazada tabilmadi!", 404);
         }
     }
 }

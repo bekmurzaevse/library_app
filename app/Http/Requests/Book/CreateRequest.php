@@ -25,8 +25,8 @@ class CreateRequest extends FormRequest
             'title' => 'required|string|unique:books,title',
             'author' => 'required|string',
             'description' => 'nullable|string',
-            'cover_image' => 'nullable|file|mimes:png,jpg,jpeg',
-            'available_copies' => 'nullable|file|mimes:png,jpg,jpeg',
+            'cover_image' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'available_copies' => 'required|integer',
         ];
     }
 }

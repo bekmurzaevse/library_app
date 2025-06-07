@@ -3,6 +3,7 @@
 namespace App\Dto\Book;
 
 use App\Http\Requests\Book\CreateRequest;
+use Illuminate\Http\UploadedFile;
 
 readonly class CreateDto
 {
@@ -10,18 +11,23 @@ readonly class CreateDto
         public string $title,
         public string $author,
         public ?string $description,
-        public ?string $cover_image,
-        public ?string $available_copies,
+        public UploadedFile $coverImage,
+        public int $available_copies,
     ) {
     }
 
+    /**
+     * Summary of from
+     * @param \App\Http\Requests\Book\CreateRequest $request
+     * @return CreateDto
+     */
     public static function from(CreateRequest $request): self
     {
         return new self(
             title: $request->get('title'),
             author: $request->get('author'),
             description: $request->get('description'),
-            cover_image: $request->get('cover_image'),
+            coverImage: $request->file('cover_image'),
             available_copies: $request->get('available_copies'),
         );
     }

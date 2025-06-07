@@ -3,11 +3,13 @@
 namespace App\Actions\Book;
 
 use App\Actions\Traits\CacheTrait;
+use App\Exceptions\ApiResponseException;
 use App\Models\Book;
 use App\Traits\ResponseTrait;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Storage;
 
 class DeleteAction
 {
@@ -23,15 +25,16 @@ class DeleteAction
     {
         try {
             $book = Book::findOrFail($id);
+            if (Storage::disk('public')->exists($book->cover_image)) {
+                Storage::disk('public')->delete($book->cover_image);
+            }
             $book->delete();
 
             return static::toResponse(
                 message: "$id - id li kita'p o'hirildi!"
             );
         } catch (ModelNotFoundException $e) {
-            // TODO ApiResponse jaratiw
-            throw new Exception("QATELIK");
-            // throw new ApiResponseException('Comment Not Found', 404);
+            throw new ApiResponseException("$id - id li kita'p bazada tabilmadi!", 404);
         }
     }
 }
