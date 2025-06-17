@@ -50,7 +50,7 @@ class BookController extends Controller
 
     public function update(UpdateRequest $request, int $id, UpdateAction $action)
     {
-        // dd($id);
+        dd($id);
         // return $action($id, UpdateDto::from($request));
         return $action($id, UpdateDto::from($request));
     }
@@ -61,7 +61,7 @@ class BookController extends Controller
      * @param \App\Actions\Book\DeleteAction $action
      * @return JsonResponse
      */
-    public function destroy(int $id, DeleteAction $action): JsonResponse
+    public function delete(int $id, DeleteAction $action): JsonResponse
     {
         return $action($id);
     }
