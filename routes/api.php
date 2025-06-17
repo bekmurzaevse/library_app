@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\BookController;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
@@ -17,17 +19,33 @@ Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:sanctum');
 
-Route::get('/', function () {
-    Cache::remember('api', 600, function () {
-        return "OOOOP";
-    });
-    return "api";
+
+Route::prefix('auth')->middleware('guest:sanctum')->group(function () {
+    Route::post('login', [UserController::class, 'login']);
 });
+
+/**
+ * User Logout
+ */
+Route::middleware(['auth:sanctum', 'ability:access-token'])->group(function () {
+    Route::prefix('auth')->group(function () {
+        Route::post('logout', [UserController::class, 'logout']);
+    });
+});
+
 
 Route::prefix('books')->group(function () {
     Route::get('/', [BookController::class, 'index']);
     Route::get('/{id}', [BookController::class, 'show']);
     Route::post('/create', [BookController::class, 'store']);
     Route::put('/update/{id}', [BookController::class, 'update']);
-    Route::delete('/delete/{id}', [BookController::class, 'destroy']);
+    Route::delete('/delete/{id}', [BookController::class, 'delete']);
+});
+
+Route::prefix('bookings')->group(function () {
+    Route::get('/', [BookingController::class, 'index']);
+    Route::get('/{id}', [BookingController::class, 'show']);
+    Route::post('/create', [BookingController::class, 'create']);
+    Route::put('/update/{id}', [BookingController::class, 'update']);
+    Route::delete('/delete/{id}', [BookingController::class, 'delete']);
 });

@@ -15,9 +15,9 @@ return new class extends Migration
             $table->id();
             $table->foreignId('user_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
             $table->foreignId('book_id')->constrained()->restrictOnDelete()->cascadeOnUpdate();
-            $table->enum('status', ['active', 'returned'])->default('active');
+            $table->enum('status', ['active', 'returned'])->default('active')->nullable();
             $table->timestamp('booking_date');
-            $table->timestamp('return_date');
+            $table->timestamp('return_date')->nullable();
             $table->timestamps();
         });
     }

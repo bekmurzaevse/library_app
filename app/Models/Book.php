@@ -15,6 +15,11 @@ class Book extends Model
         'available_copies',
     ];
 
-    
-
+    protected function casts(): array
+    {
+        return [
+            'created_at' => 'datetime',
+            'updated_at' => 'datetime',
+        ];
+    }
 }
