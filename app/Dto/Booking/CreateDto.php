@@ -7,9 +7,9 @@ use App\Http\Requests\Booking\CreateRequest;
 readonly class CreateDto
 {
     public function __construct(
-        public int $userId,
+        // public int $userId,
         public int $bookId,
-        public ?string $returnDate,
+        // public ?string $returnDate,
     ) {
     }
     /**
@@ -20,9 +20,9 @@ readonly class CreateDto
     public static function from(CreateRequest $request): self
     {
         return new self(
-            userId: $request->get('user_id'),
+            // userId: $request->get('user_id'),
             bookId: $request->get('book_id'),
-            returnDate: $request->get('return_date'),
+            // returnDate: $request->get('return_date'),
         );
     }
 }

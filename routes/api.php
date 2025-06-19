@@ -22,30 +22,46 @@ Route::get('/user', function (Request $request) {
 
 Route::prefix('auth')->middleware('guest:sanctum')->group(function () {
     Route::post('login', [UserController::class, 'login']);
+    Route::post('register', [UserController::class, 'register']);
 });
 
 /**
  * User Logout
  */
-Route::middleware(['auth:sanctum', 'ability:access-token'])->group(function () {
+Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('auth')->group(function () {
         Route::post('logout', [UserController::class, 'logout']);
     });
 });
 
+Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('role:admin')->group(function () {
+        Route::prefix('books')->group(function () {
+            Route::post('/create', [BookController::class, 'store']);
+            Route::put('/update/{id}', [BookController::class, 'update']);
+            Route::delete('/delete/{id}', [BookController::class, 'delete']);
+        });
 
-Route::prefix('books')->group(function () {
-    Route::get('/', [BookController::class, 'index']);
-    Route::get('/{id}', [BookController::class, 'show']);
-    Route::post('/create', [BookController::class, 'store']);
-    Route::put('/update/{id}', [BookController::class, 'update']);
-    Route::delete('/delete/{id}', [BookController::class, 'delete']);
+        Route::prefix('bookings')->group(function () {
+            Route::get('/', [BookingController::class, 'index']);
+            Route::get('/{id}', [BookingController::class, 'show']);
+            Route::delete('/delete/{id}', [BookingController::class, 'delete']);
+
+        });
+    });
 });
 
-Route::prefix('bookings')->group(function () {
-    Route::get('/', [BookingController::class, 'index']);
-    Route::get('/{id}', [BookingController::class, 'show']);
-    Route::post('/create', [BookingController::class, 'create']);
-    Route::put('/update/{id}', [BookingController::class, 'update']);
-    Route::delete('/delete/{id}', [BookingController::class, 'delete']);
+Route::middleware('auth:sanctum')->group(function () {
+    Route::middleware('role:admin,user')->group(function () {
+        Route::prefix('books')->group(function () {
+            Route::get('/', [BookController::class, 'index']);
+            Route::get('/{id}', [BookController::class, 'show']);
+        });
+
+        Route::prefix('bookings')->group(function () {
+            Route::post('/create', [BookingController::class, 'create']);
+            Route::put('/update/{id}', [BookingController::class, 'update']);
+        });
+    });
 });
+
