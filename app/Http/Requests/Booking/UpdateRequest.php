@@ -22,9 +22,9 @@ class UpdateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required|integer',
+            // 'user_id' => 'required|integer',
             'book_id' => 'required|integer|exists:books,id',
-            'status' => 'nullable|string',
+            'status' => 'required|in:active,returned',
             // 'booking_date' => 'required|date_format:Y-m-d',
             // 'return_date' => 'required|date_format:Y-m-d',
         ];

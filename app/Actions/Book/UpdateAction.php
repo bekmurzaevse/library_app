@@ -40,11 +40,11 @@ class UpdateAction
             $path = Storage::disk('public')->putFileAs('photos', $dto->coverImage, $fileName);
 
             $data = [
-                'title' => $dto->title,
-                'author' => $dto->author,
-                'description' => $dto->description,
-                'cover_image' => $path,
-                'available_copies' => $dto->available_copies,
+                'title' => $dto->title ?? $book->title,
+                'author' => $dto->author ?? $book->author,
+                'description' => $dto->description ?? $book->description,
+                'cover_image' => $path ?? $book->cover_image,
+                'available_copies' => $dto->available_copies ?? $book->available_copies,
             ];
 
             $book->update($data);

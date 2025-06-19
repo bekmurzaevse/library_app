@@ -26,10 +26,14 @@ class UpdateAction
             $booking = Booking::findOrFail($id);
 
             $data = [
-                'user_id' => $dto->userId ?? $booking->userId,
-                'book_id' => $dto->bookId ?? $booking->bookId,
-                'status' => $dto->status ?? $booking->status,
+                'book_id' => $dto->bookId,
+                'status' => $dto->status,
+                'return_date' => $dto->status === 'returned' ? now() : null,
             ];
+
+            if ($dto->status === 'returned' && $booking->status !== 'returned') {
+                $booking->book->increment('available_copies');
+            }
 
             $booking->update($data);
 

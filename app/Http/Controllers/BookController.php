@@ -48,10 +48,8 @@ class BookController extends Controller
     }
 
 
-    public function update(UpdateRequest $request, int $id, UpdateAction $action)
+    public function update(UpdateRequest $request, int $id, UpdateAction $action): JsonResponse
     {
-        dd($id);
-        // return $action($id, UpdateDto::from($request));
         return $action($id, UpdateDto::from($request));
     }
 
