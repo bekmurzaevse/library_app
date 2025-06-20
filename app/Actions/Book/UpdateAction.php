@@ -29,15 +29,17 @@ class UpdateAction
         try {
             $book = Book::findOrFail($id);
 
-            if (Storage::disk('public')->exists($book->cover_image)) {
-                Storage::disk('public')->delete($book->cover_image);
+            if ($dto->coverImage) {
+                $originalFilename = $dto->coverImage->getClientOriginalName();
+                $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
+                $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $dto->coverImage->extension();
+
+                $path = Storage::disk('public')->putFileAs('photos', $dto->coverImage, $fileName);
+
+                if (!empty($book->cover_image) && Storage::disk('public')->exists($book->cover_image)) {
+                    Storage::disk('public')->delete($book->cover_image);
+                }
             }
-
-            $originalFilename = $dto->coverImage->getClientOriginalName();
-            $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-            $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $dto->coverImage->extension();
-
-            $path = Storage::disk('public')->putFileAs('photos', $dto->coverImage, $fileName);
 
             $data = [
                 'title' => $dto->title ?? $book->title,

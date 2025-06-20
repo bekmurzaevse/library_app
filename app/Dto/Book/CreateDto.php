@@ -11,7 +11,7 @@ readonly class CreateDto
         public string $title,
         public string $author,
         public ?string $description,
-        public UploadedFile $coverImage,
+        public ?UploadedFile $coverImage,
         public int $available_copies,
     ) {
     }

@@ -23,8 +23,8 @@ class UpdateRequest extends FormRequest
     {
         return [
             // 'user_id' => 'required|integer',
-            'book_id' => 'required|integer|exists:books,id',
-            'status' => 'required|in:active,returned',
+            'book_id' => 'sometimes|integer|exists:books,id',
+            'status' => 'sometimes|in:active,returned',
             // 'booking_date' => 'required|date_format:Y-m-d',
             // 'return_date' => 'required|date_format:Y-m-d',
         ];

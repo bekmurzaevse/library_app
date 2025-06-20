@@ -9,11 +9,11 @@ readonly class UpdateDto
 {
     public function __construct(
         // public string $id,
-        public string $title,
-        public string $author,
+        public ?string $title,
+        public ?string $author,
         public ?string $description,
-        public UploadedFile $coverImage,
-        public int $available_copies,
+        public ?UploadedFile $coverImage,
+        public ?int $available_copies,
     ) {
     }
 
