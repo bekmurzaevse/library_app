@@ -33,8 +33,7 @@ class CreateAction
             }
 
             $data = [
-                // 'user_id' => auth()->user()->id,
-                'user_id' => 1,
+                'user_id' => auth()->user()->id,
                 'book_id' => $dto->bookId,
                 'status' => 'active',
                 'booking_date' => now(),

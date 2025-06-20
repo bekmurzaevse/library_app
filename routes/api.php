@@ -52,7 +52,7 @@ Route::middleware('auth:sanctum')->group(function () {
 });
 
 Route::middleware('auth:sanctum')->group(function () {
-    Route::middleware('role:admin,user')->group(function () {
+    Route::middleware('role:admin|user')->group(function () {
         Route::prefix('books')->group(function () {
             Route::get('/', [BookController::class, 'index']);
             Route::get('/{id}', [BookController::class, 'show']);

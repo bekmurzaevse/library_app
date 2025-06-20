@@ -9,7 +9,6 @@ use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
-
 class CreateAction
 {
     use ResponseTrait;
@@ -22,12 +21,14 @@ class CreateAction
     public function __invoke(CreateDto $dto): JsonResponse
     {
         $photo = $dto->coverImage;
+        $path = null;
+        if ($photo) {
+            $originalFilename = $photo->getClientOriginalName();
+            $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
+            $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $photo->extension();
 
-        $originalFilename = $photo->getClientOriginalName();
-        $fileName = pathinfo($originalFilename, PATHINFO_FILENAME);
-        $fileName = $fileName . '_' . Str::random(10) . '_' . now()->format('Y-m-d-H:i:s') . '.' . $photo->extension();
-
-        $path = Storage::disk('public')->putFileAs('photos', $photo, $fileName);
+            $path = Storage::disk('public')->putFileAs('photos', $photo, $fileName);
+        }
 
         Book::create([
             'title' => $dto->title,

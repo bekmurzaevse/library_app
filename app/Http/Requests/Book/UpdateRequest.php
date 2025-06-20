@@ -24,8 +24,8 @@ class UpdateRequest extends FormRequest
         return [
             'title' => 'sometimes|string|unique:books,title',
             'author' => 'sometimes|string',
-            'description' => 'nullable|string',
-            'cover_image' => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'description' => 'sometimes|string',
+            'cover_image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
             'available_copies' => 'sometimes|integer',
         ];
     }
