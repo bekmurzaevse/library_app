@@ -26,4 +26,18 @@ class LoginRequest extends FormRequest
             'password' => 'required|string|min:6',
         ];
     }
+
+    /**
+     * Summary of messages
+     * @return array{password.min: string, password.required: string, phone.digits: string, phone.required: string}
+     */
+    public function messages(): array
+    {
+        return [
+            'phone.required' => "Telefon nomeri kiritiliwi sha'rt!",
+            'phone.digits'   => "Telefon nomeri 12 xanali san boliwi kerek. (Misal: 998901234567)",
+            'password.required' => 'Parol kiritilishi shart.',
+            'password.min'      => 'Parol keminde 6 xanali boliwi kerek!',
+        ];
+    }
 }

@@ -11,7 +11,7 @@ class UpdateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -27,6 +27,19 @@ class UpdateRequest extends FormRequest
             'description' => 'sometimes|string',
             'cover_image' => 'sometimes|image|mimes:jpeg,png,jpg|max:2048',
             'available_copies' => 'sometimes|integer',
+        ];
+    }
+
+    /**
+     * Summary of messages
+     * @return array{author.required: string, available_copies.integer: string, available_copies.required: string, cover_image.image: string, title.required: string, title.unique: string}
+     */
+    public function messages(): array
+    {
+        return [
+            'title.unique' => "Bunday kita'p tin' ati bazada bar!",
+            'cover_image.image' => "Foto tipinde mag'liwmat kiritiliwi kerek!",
+            'available_copies.integer' => "Kita'ptin' sani pu'tin san boliwi kerek!",
         ];
     }
 }

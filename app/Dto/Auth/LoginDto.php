@@ -13,7 +13,11 @@ readonly class LoginDto
     ) {
     }
 
-
+    /**
+     * Summary of from
+     * @param \App\Http\Requests\Auth\LoginRequest $request
+     * @return LoginDto
+     */
     public static function from(LoginRequest $request): self
     {
         return new self(

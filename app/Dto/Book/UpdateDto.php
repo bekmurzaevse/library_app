@@ -8,7 +8,6 @@ use Illuminate\Http\UploadedFile;
 readonly class UpdateDto
 {
     public function __construct(
-        // public string $id,
         public ?string $title,
         public ?string $author,
         public ?string $description,
@@ -25,7 +24,6 @@ readonly class UpdateDto
     public static function from(UpdateRequest $request): self
     {
         return new self(
-            // id: $request->get('id'),
             title: $request->get('title'),
             author: $request->get('author'),
             description: $request->get('description'),

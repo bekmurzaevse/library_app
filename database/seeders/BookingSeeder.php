@@ -14,7 +14,10 @@ class BookingSeeder extends Seeder
     public function run(): void
     {
         Booking::create([
-
+            'user_id' => 1,
+            'book_id' => 1,
+            'status' => 'active',
+            'booking_date' => now(),
         ]);
     }
 }
