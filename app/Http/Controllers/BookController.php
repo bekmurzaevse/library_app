@@ -47,7 +47,13 @@ class BookController extends Controller
         return $action($id);
     }
 
-
+    /**
+     * Summary of update
+     * @param \App\Http\Requests\Book\UpdateRequest $request
+     * @param int $id
+     * @param \App\Actions\Book\UpdateAction $action
+     * @return JsonResponse
+     */
     public function update(UpdateRequest $request, int $id, UpdateAction $action): JsonResponse
     {
         return $action($id, UpdateDto::from($request));
@@ -63,5 +69,4 @@ class BookController extends Controller
     {
         return $action($id);
     }
-
 }

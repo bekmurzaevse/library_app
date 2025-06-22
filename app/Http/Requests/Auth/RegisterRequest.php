@@ -24,7 +24,7 @@ class RegisterRequest extends FormRequest
         return [
             'first_name' => 'required|string',
             'last_name' => 'required|string',
-            'phone' => 'required|string|digits:12',
+            'phone' => 'required|string|digits:12|unique:users,phone',
             'password' => 'required|string|min:6',
         ];
     }
@@ -41,6 +41,7 @@ class RegisterRequest extends FormRequest
             'last_name.required' => "Familiya kiritiliwi sha'rt!",
             'last_name.string' => "Familiya tekst boliwi kerek!",
             'phone.required' => "Telefon nomeri kiritiliwi sha'rt!",
+            'phone.unique' => "Bunday telefon nomeri bazada bar!",
             'phone.digits'   => "Telefon nomeri 12 xanali san boliwi kerek. (Misal: 998901234567)",
             'password.required' => 'Parol kiritilishi shart.',
             'password.min'      => 'Parol keminde 6 xanali boliwi kerek!',

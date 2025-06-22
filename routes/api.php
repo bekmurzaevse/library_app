@@ -1,10 +1,9 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BookController;
 use App\Http\Controllers\BookingController;
-use App\Http\Controllers\UserController;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Route;
 
 Route::pattern('id', '\d+');
@@ -21,8 +20,8 @@ Route::get('/user', function (Request $request) {
 
 
 Route::prefix('auth')->middleware('guest:sanctum')->group(function () {
-    Route::post('login', [UserController::class, 'login']);
-    Route::post('register', [UserController::class, 'register']);
+    Route::post('login', [AuthController::class, 'login']);
+    Route::post('register', [AuthController::class, 'register']);
 });
 
 /**
@@ -30,7 +29,7 @@ Route::prefix('auth')->middleware('guest:sanctum')->group(function () {
  */
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::prefix('auth')->group(function () {
-        Route::post('logout', [UserController::class, 'logout']);
+        Route::post('logout', [AuthController::class, 'logout']);
     });
 });
 
