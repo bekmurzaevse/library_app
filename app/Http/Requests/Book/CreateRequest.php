@@ -13,7 +13,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -32,17 +32,21 @@ class CreateRequest extends FormRequest
         ];
     }
 
-    // public function messages(): array
-    // {
-    //     return [
-    //         'title.required' => 'Kitob nomi kiritilishi shart.',
-    //         'title.unique' => 'Bu nomdagi kitob bazada mavjud.',
-    //         'author.required' => 'Muallif ismini kiritish shart.',
-    //         'cover_image.image' => 'Rasm noto‘g‘ri formatda.',
-    //         'available_copies.required' => 'Nusxa soni ko‘rsatilishi kerak.',
-    //         'available_copies.integer' => 'Nusxa soni butun son bo‘lishi kerak.',
-    //     ];
-    // }
+    /**
+     * Summary of messages
+     * @return array{author.required: string, available_copies.integer: string, available_copies.required: string, cover_image.image: string, title.required: string, title.unique: string}
+     */
+    public function messages(): array
+    {
+        return [
+            'title.required' => "Kita'p tin' ati kiritiliwi sha'rt",
+            'title.unique' => "Bunday kita'p tin' ati bazada bar!",
+            'author.required' => "Avtor kiritiliw sha'rt!",
+            'cover_image.image' => "Foto tipinde mag'liwmat kiritiliwi kerek!",
+            'available_copies.required' => "Kitap tin' sani kiritiliw sha'rt!",
+            'available_copies.integer' => "Kita'ptin' sani pu'tin san boliwi kerek!",
+        ];
+    }
 
 
 }

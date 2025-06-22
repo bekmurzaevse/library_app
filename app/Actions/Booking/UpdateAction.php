@@ -27,7 +27,7 @@ class UpdateAction
 
             $data = [
                 'book_id' => $dto->bookId,
-                'status' => $dto->status,
+                'status' => $dto->status ?? $booking->status,
                 'return_date' => $dto->status === 'returned' ? now() : null,
             ];
 

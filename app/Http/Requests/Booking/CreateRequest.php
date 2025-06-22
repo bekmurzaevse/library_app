@@ -11,7 +11,7 @@ class CreateRequest extends FormRequest
      */
     public function authorize(): bool
     {
-        return true;
+        return auth()->check();
     }
 
     /**
@@ -22,11 +22,20 @@ class CreateRequest extends FormRequest
     public function rules(): array
     {
         return [
-            // 'user_id' => 'required|integer',
             'book_id' => 'required|integer|exists:books,id',
-            // 'status' => 'nullable|string',
-            // 'booking_date' => 'required|date_format:Y-m-d',
-            // 'return_date' => 'required|date_format:Y-m-d',
+        ];
+    }
+
+    /**
+     * Summary of messages
+     * @return array{book_id.exists: string, book_id.integer: string, book_id.required: string}
+     */
+    public function messages(): array
+    {
+        return [
+            'book_id.required' => "Kita'p id kiritiliwi sha'rt",
+            'book_id.integer' => "Kita'p id pu'tin san boliwi kerek!",
+            'book_id.exists' => "Kita'p id bazada tabilmadi!",
         ];
     }
 }

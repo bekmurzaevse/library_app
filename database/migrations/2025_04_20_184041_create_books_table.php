@@ -18,6 +18,7 @@ return new class extends Migration
             $table->text('description')->nullable();
             $table->string('cover_image')->nullable();
             $table->unsignedInteger('available_copies');
+            $table->softDeletes();
             $table->timestamps();
         });
     }

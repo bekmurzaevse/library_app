@@ -18,6 +18,7 @@ return new class extends Migration
             $table->enum('status', ['active', 'returned'])->default('active')->nullable();
             $table->timestamp('booking_date');
             $table->timestamp('return_date')->nullable();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

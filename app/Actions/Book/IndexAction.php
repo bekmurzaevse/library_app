@@ -23,10 +23,8 @@ class IndexAction
         });
 
         return static::toResponse(
-            data: [
-                'message' => "Book list",
-                'data' => new BookCollection($data),
-            ],
+            message: "Book list",
+            data: new BookCollection($data),
         );
     }
 }
