@@ -7,7 +7,6 @@ use App\Dto\Book\UpdateDto;
 use App\Exceptions\ApiResponseException;
 use App\Models\Book;
 use App\Traits\ResponseTrait;
-use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Storage;
