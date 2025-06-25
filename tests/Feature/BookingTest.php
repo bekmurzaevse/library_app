@@ -67,7 +67,7 @@ class BookingTest extends TestCase
                 'message',
                 'data' => [
                     'id',
-                    'user_id',
+                    'user',
                     'book',
                     'status',
                     'booking_date',

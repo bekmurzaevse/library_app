@@ -34,6 +34,9 @@ COPY ./_docker/images/php/conf.d/php.ini /usr/local/etc/php/conf.d/php.ini
 RUN curl -sS https://getcomposer.org/installer | php -- \
      --install-dir=/usr/local/bin --filename=composer
 
+# install driver pdo_pgsql
+RUN docker-php-ext-install pdo_pgsql pgsql
+
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 USER www-data
