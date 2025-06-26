@@ -90,27 +90,50 @@ jobs:
   #           # docker compose exec php php artisan config:cache
   #         EOF
 
+  # deploy:
+  #   name: 🚀 Deploy to Server
+  #   # needs: laravel-tests
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/main'
+
+  #   steps:
+  #     - name: 🔐 Установка SSH-ключа
+  #       uses: webfactory/ssh-agent@v0.9.0
+  #       with:
+  #         ssh-private-key: ${{ secrets.VPS_KEY }}
+
+  #     - name: 📤 Деплой на сервер
+  #       run: |
+  #         ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
+  #           cd /var/www/api.library.uz
+  #           git config --global --add safe.directory /var/www/api.library.uz
+  #           git pull origin ${GITHUB_REF_NAME}
+  #           docker-compose -f docker-compose.prod.yml pull
+  #           docker-compose -f docker-compose.prod.yml up -d --build
+  #           # docker exec project_php php artisan migrate --force
+  #           # docker exec project_php php artisan config:cache
+  #         EOF
+
   deploy:
-    name: 🚀 Deploy to Server
-    # needs: laravel-tests
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
-
     steps:
-      - name: 🔐 Установка SSH-ключа
-        uses: webfactory/ssh-agent@v0.9.0
-        with:
-          ssh-private-key: ${{ secrets.VPS_KEY }}
+      - name: Checkout
+        uses: actions/checkout@v3
 
-      - name: 📤 Деплой на сервер
+      - name: Build and push Docker image
         run: |
-          ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
-            cd /var/www/api.library.uz
-            git config --global --add safe.directory /var/www/api.library.uz
-            git pull origin ${GITHUB_REF_NAME}
-            docker-compose -f docker-compose.prod.yml pull
-            docker-compose -f docker-compose.prod.yml up -d --build
-            # docker exec project_php php artisan migrate --force
-            # docker exec project_php php artisan config:cache
-          EOF
-  
+          docker build -t myrepo/library-app:latest .
+          echo "${{ secrets.DOCKER_PASSWORD }}" | docker login -u ${{ secrets.DOCKER_USERNAME }} --password-stdin
+          docker push myrepo/library:latest
+
+      - name: SSH Deploy
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_KEY }}
+          script: |
+            cd /var/www/library
+            docker pull myrepo/library:latest
+            docker compose -f docker-compose.prod.yml up -d
+
