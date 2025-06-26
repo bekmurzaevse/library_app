@@ -113,6 +113,7 @@ jobs:
             docker exec project_php php artisan migrate --force
             docker exec project_php php artisan config:cache
           EOF
+    # test
   # deploy:
   #   runs-on: ubuntu-latest
   #   steps:
