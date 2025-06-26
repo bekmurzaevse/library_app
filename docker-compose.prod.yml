@@ -44,19 +44,19 @@ services:
     networks:
       - project_network
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: project_pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@admin.com
-      PGADMIN_DEFAULT_PASSWORD: admin123
-    ports:
-      - "5050:80"
-    networks:
-      - project_network
-    depends_on:
-      - postgres
+  # pgadmin:
+  #   image: dpage/pgadmin4
+  #   container_name: project_pgadmin
+  #   restart: always
+  #   environment:
+  #     PGADMIN_DEFAULT_EMAIL: admin@admin.com
+  #     PGADMIN_DEFAULT_PASSWORD: admin123
+  #   ports:
+  #     - "5050:80"
+  #   networks:
+  #     - project_network
+  #   depends_on:
+  #     - postgres
 
   redis:
     image: redis:latest
