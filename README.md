@@ -63,7 +63,6 @@ php artisan l5-swagger:generate
 - **project_postgres**: база данных PostgreSQL, порт: 5432
 - **project_pgadmin**: Панель управление для базы данных (http://localhost:5050)
 - **project_redis**: служит для хранение кешов а также запуски очередей, порт: 6379
-- **project_queue**: контейнер предназначен для автоматического запуска queue очередей
 
 ## Полезные команды
 
@@ -101,15 +100,6 @@ php artisan test
 
 ```bash
 php artisan migrate:fresh --seed
-```
-
-### Работа с очередями
-
-Очереди запускаются автоматически в контейнере `sbi_queue`. Для ручного запуска:
-
-```bash
-docker exec -it project_php bash
-php artisan queue:work
 ```
 
 ## Устранение неполадок
