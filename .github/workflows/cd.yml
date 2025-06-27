@@ -20,8 +20,7 @@ jobs:
           username: ${{ secrets.VPS_USER }}
           key: ${{ secrets.VPS_KEY }}
           script: |
-            cd /home/${{ secrets.VPS_USER }}/laravel-project
-
+            cd /home/${{ secrets.VPS_USER }}
             echo "Pulling latest changes..."
             git pull origin main
 
