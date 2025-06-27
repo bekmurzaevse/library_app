@@ -29,9 +29,9 @@ jobs:
             docker compose up -d --build
 
             echo "Running Laravel commands..."
-            docker exec laravel_app composer install --no-interaction --prefer-dist
-            docker exec laravel_app php artisan migrate --force
-            docker exec laravel_app php artisan config:cache
+            docker exec project_php composer install --no-interaction --prefer-dist
+            docker exec project_php php artisan migrate --force
+            docker exec project_php php artisan config:cache
 
 
 
