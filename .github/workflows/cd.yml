@@ -90,6 +90,7 @@ jobs:
   #           # docker compose exec php php artisan config:cache
   #         EOF
 
+  # test#
   deploy:
     name: 🚀 Deploy to Server
     # needs: laravel-tests
