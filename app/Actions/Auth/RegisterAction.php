@@ -1,6 +1,5 @@
 <?php
 
-
 namespace App\Actions\Auth;
 
 use App\Dto\Auth\RegisterDto;

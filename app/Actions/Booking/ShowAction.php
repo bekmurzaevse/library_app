@@ -5,7 +5,6 @@ namespace App\Actions\Booking;
 use App\Actions\Traits\CacheTrait;
 use App\Exceptions\ApiResponseException;
 use App\Http\Resources\BookingResource;
-use App\Http\Resources\BookResource;
 use App\Models\Booking;
 use App\Traits\ResponseTrait;
 use Illuminate\Database\Eloquent\ModelNotFoundException;

@@ -7,7 +7,6 @@ use App\Exceptions\ApiResponseException;
 use App\Http\Resources\BookResource;
 use App\Models\Book;
 use App\Traits\ResponseTrait;
-use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\JsonResponse;
 

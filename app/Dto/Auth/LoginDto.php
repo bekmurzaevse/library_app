@@ -3,7 +3,6 @@
 namespace App\Dto\Auth;
 
 use App\Http\Requests\Auth\LoginRequest;
-use App\Traits\ResponseTrait;
 
 readonly class LoginDto
 {

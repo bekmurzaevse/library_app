@@ -2,9 +2,7 @@
 
 namespace App\Http\Requests\Book;
 
-use Illuminate\Contracts\Validation\Validator;
 use Illuminate\Foundation\Http\FormRequest;
-use Illuminate\Http\Exceptions\HttpResponseException;
 
 class CreateRequest extends FormRequest
 {
@@ -17,9 +15,8 @@ class CreateRequest extends FormRequest
     }
 
     /**
-     * Get the validation rules that apply to the request.
-     *
-     * @return array<string, \Illuminate\Contracts\Validation\ValidationRule|array<mixed>|string>
+     * Summary of rules
+     * @return array{author: string, available_copies: string, cover_image: string, description: string, title: string}
      */
     public function rules(): array
     {
