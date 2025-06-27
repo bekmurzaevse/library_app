@@ -2,10 +2,18 @@
 
 Создать API для библиотеки, позволяющий управлять книгами, бронированием, ролями пользователей (admin, user) и системой авторизации. Проект должен быть полностью контейнеризирован в Docker, с настроенным CI/CD процессом и деплоем на VPS.
 
-## Требования
+## Авторизация
 
-- Docker и Docker Compose
-- Git
+- Admin 
+-- phone : 998971234567
+-- password : 1234567
+- User 
+-- phone : 998971234568
+-- password : 1234567
+
+## Документация Swagger
+
+- http://localhost:8000/api/documentation
 
 ## Как развернуть проект
 
@@ -45,6 +53,7 @@ composer install
 php artisan key:generate
 php artisan migrate --seed
 php artisan storage:link
+php artisan l5-swagger:generate
 ```
 
 ## Дополнительная информация о контейнерах
