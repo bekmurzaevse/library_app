@@ -92,7 +92,6 @@ docker exec -it project_php bash
 
 ```bash
 docker exec -it project_php bash
-touch database/testing.sqlite
 php artisan test
 ```
 
