@@ -39,5 +39,5 @@ jobs:
 
       - name: 🧪 SQLite bilan testlar
         run: |
-          php artisan config:clear
-          php artisan test
+          docker exec project_php php artisan config:clear
+          docker exec project_php php artisan test
