@@ -47,14 +47,11 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: 📤 Деплой на сервер
-        # env:
-        #   BRANCH: ${{ github.ref_name }}
         run: |
-          BRANCH=$(echo "${GITHUB_REF#refs/heads/}")
           ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
             cd /home/saylaww/library
             git config --global --add safe.directory /home/saylaww/library
-            git pull origin $BRANCH
+            git pull origin main
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
