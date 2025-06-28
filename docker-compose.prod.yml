@@ -65,7 +65,6 @@ services:
       [
           "sh",
           "-c",
-          # "redis-server --requirepass 123"
           "redis-server --requirepass $${REDIS_PASSWORD}"
       ]
     restart: always
