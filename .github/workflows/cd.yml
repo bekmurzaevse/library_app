@@ -6,33 +6,6 @@ on:
       - main
 
 jobs:
-  # deploy:
-  #   runs-on: ubuntu:latest
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Deploy to server
-  #       uses: appleboy/ssh-action@master
-  #       with:
-  #         host: ${{ secrets.VPS_HOST }}
-  #         username: ${{ secrets.VPS_USER }}
-  #         key: ${{ secrets.VPS_KEY }}
-  #         script: |
-  #           cd /home/${{ secrets.VPS_USER }}
-  #           echo "Pulling latest changes..."
-  #           git pull origin main
-
-  #           echo "Building docker containers..."
-  #           docker compose down
-  #           docker compose up -d --build
-
-  #           echo "Running Laravel commands..."
-  #           docker exec project_php composer install --no-interaction --prefer-dist
-  #           docker exec project_php php artisan migrate --force
-  #           docker exec project_php php artisan config:cache
-
   # test1111
   deploy:
     name: 🚀 Deploy to Server
@@ -48,10 +21,11 @@ jobs:
 
       - name: 📤 Деплой на сервер
         run: |
+          BRANCH=$(echo "${GITHUB_REF##*/}")
           ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
             cd /home/saylaww/library
             git config --global --add safe.directory /home/saylaww/library
-            git pull origin ${GITHUB_REF_NAME}
+            git pull origin ${BRANCH}
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
