@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/test', function () {
-    return "TEST PAGE";
+    return "Bas bet";
 });
 
 
