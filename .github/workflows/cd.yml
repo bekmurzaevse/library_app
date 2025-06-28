@@ -38,7 +38,7 @@ jobs:
     name: 🚀 Deploy to Server
     # needs: laravel-tests
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/main'
+    # if: github.ref == 'refs/heads/main'
 
     steps:
       - name: 🔐 Установка SSH-ключа
