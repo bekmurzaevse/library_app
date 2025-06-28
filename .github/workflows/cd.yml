@@ -28,6 +28,10 @@ jobs:
             git pull origin ${BRANCH}
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
+
+            docker exec project_php chown -R saylaww:www-data /home/saylaww/library/storage /home/saylaww/library/bootstrap/cache
+            docker exec project_php chmod -R 775 /home/saylaww/library/storage /home/saylaww/library/bootstrap/cache
+
             docker exec project_php php artisan migrate --force
             docker exec project_php php artisan config:cache
             docker exec project_php php artisan l5-swagger:generate
