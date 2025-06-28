@@ -46,11 +46,6 @@ jobs:
         with:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
-      - name: 🧪 SQLite bilan testlar
-        run: |
-          php artisan config:clear
-          php artisan test
-
       - name: 📤 Деплой на сервер
         run: |
           ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
@@ -64,3 +59,7 @@ jobs:
             docker exec project_php php artisan l5-swagger:generate
           EOF
 
+      - name: 🧪 SQLite bilan testlar
+        run: |
+          php artisan config:clear
+          php artisan test
