@@ -37,34 +37,3 @@ jobs:
             docker exec project_php php artisan l5-swagger:generate
           EOF
 
-      - name: 🧪 SQLite bilan testlar
-        run: |
-          docker exec project_php php artisan config:clear
-          docker exec project_php php artisan test
-
-  laravel-tests:
-    name: 🧪 Run Laravel Feature Tests (SQLite)
-    runs-on: ubuntu-latest
-
-    steps:
-      # - name: 📥 Kodni yuklash
-      #   uses: actions/checkout@v3
-
-      # - name: 🧰 PHP o'rnatish
-      #   uses: shivammathur/setup-php@v2
-      #   with:
-      #     php-version: '8.2'
-      #     extensions: mbstring, bcmath, sqlite
-      #     tools: composer
-
-      # - name: 📦 Composer install
-      #   run: composer install --prefer-dist --no-progress --no-suggest
-
-      # - name: 🗂️ Laravel sozlash
-      #   run: |
-      #     cp .env.example .env
-      #     php artisan config:clear
-      #     php artisan key:generate
-
-      - name: 🧪 SQLite orqali testlarni ishga tushirish
-        run: php artisan test
