@@ -54,7 +54,6 @@ jobs:
             cd /home/saylaww/library
             git config --global --add safe.directory /home/saylaww/library
             git pull origin ${GITHUB_REF_NAME}
-            docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
             docker exec project_php php artisan config:cache
