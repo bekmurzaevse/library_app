@@ -44,7 +44,7 @@ jobs:
       - name: 🔐 Установка SSH-ключа
         uses: webfactory/ssh-agent@v0.9.0
         with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+          ssh-private-key: ${{ secrets.SSH_KEY2 }}
 
       - name: 📤 Деплой на сервер
         run: |
