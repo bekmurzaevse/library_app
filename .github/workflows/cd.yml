@@ -47,6 +47,8 @@ jobs:
           ssh-private-key: ${{ secrets.SSH_KEY }}
 
       - name: 📤 Деплой на сервер
+        env:
+          BRANCH: ${{ github.ref_name }}
         run: |
           ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
             cd /home/saylaww/library
