@@ -49,8 +49,8 @@ jobs:
       - name: 📤 Деплой на сервер
         run: |
           ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
-            cd /home/saylaww/basqa
-            git config --global --add safe.directory /home/saylaww/basqa
+            cd /home/saylaww/library
+            git config --global --add safe.directory /home/saylaww/library
             git pull origin ${GITHUB_REF_NAME}
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
