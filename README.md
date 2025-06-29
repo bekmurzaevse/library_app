@@ -13,7 +13,8 @@
 
 ## Документация Swagger
 
-- http://localhost:8000/api/documentation
+- server -- http://176.96.243.188/api/documentation
+- local -- http://localhost:8000/api/documentation
 
 ## Как развернуть проект
 
