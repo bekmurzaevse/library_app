@@ -29,6 +29,10 @@ jobs:
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
             docker exec project_php php artisan config:cache
+
+            docker exec project_php chmod -R 775 storage/api-docs
+            docker exec project_php chown -R saylaww:www-data storage/api-docs
+
             docker exec project_php php artisan l5-swagger:generate
           EOF
         # run: |
