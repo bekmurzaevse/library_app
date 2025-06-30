@@ -24,8 +24,9 @@ jobs:
             BRANCH_NAME="main"
             cd /home/saylaww/library
             git config --global --add safe.directory /home/saylaww/library
-            git fetch origin \$BRANCH_NAME
-            git reset --hard origin/\$BRANCH_NAME
+            git remote -v
+            git fetch origin main
+            git reset --hard origin/main
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
