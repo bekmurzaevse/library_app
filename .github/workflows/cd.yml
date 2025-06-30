@@ -6,10 +6,9 @@ on:
       - main
 
 jobs:
-  # test11111111
+  # test11111111 before docker pull
   deploy:
     name: 🚀 Deploy to Server
-    # needs: laravel-tests
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main'
 
@@ -22,9 +21,11 @@ jobs:
       - name: 📤 Деплой на сервер
         run: |
           ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
+            BRANCH_NAME="main"
             cd /home/saylaww/library
             git config --global --add safe.directory /home/saylaww/library
-            git pull origin ${GITHUB_REF_NAME}
+            git fetch origin \$BRANCH_NAME
+            git reset --hard origin/\$BRANCH_NAME
             docker-compose -f docker-compose.prod.yml pull
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
@@ -35,20 +36,4 @@ jobs:
 
             docker exec project_php php artisan l5-swagger:generate
           EOF
-        # run: |
-        #   BRANCH=$(echo "${GITHUB_REF##*/}")
-        #   ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
-        #     cd /home/saylaww/library
-        #     git config --global --add safe.directory /home/saylaww/library
-        #     git pull origin main
-        #     docker-compose -f docker-compose.prod.yml pull
-        #     docker-compose -f docker-compose.prod.yml up -d --build
-
-        #     docker exec project_php chown -R saylaww:www-data /home/saylaww/library/storage /home/saylaww/library/bootstrap/cache
-        #     docker exec project_php chmod -R 775 /home/saylaww/library/storage /home/saylaww/library/bootstrap/cache
-
-        #     docker exec project_php php artisan migrate --force
-        #     docker exec project_php php artisan config:cache
-        #     docker exec project_php php artisan l5-swagger:generate
-        #   EOF
 
