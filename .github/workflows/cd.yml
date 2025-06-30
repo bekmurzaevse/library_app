@@ -5,6 +5,25 @@ on:
     branches:
       - main
 
+# 'EOF'
+#             BRANCH_NAME="main"
+#             cd /home/saylaww/library
+#             git config --global --add safe.directory /home/saylaww/library
+#             git remote -v
+#             git fetch origin main
+#             git reset --hard origin/main
+#             docker-compose -f docker-compose.prod.yml pull
+#             docker-compose -f docker-compose.prod.yml up -d --build
+#             docker exec project_php php artisan migrate --force
+#             docker exec project_php php artisan config:cache
+
+#             docker exec project_php chmod -R 775 storage/api-docs
+#             docker exec project_php chown -R saylaww:www-data storage/api-docs
+
+#             docker exec project_php php artisan l5-swagger:generate
+#           EOF
+
+
 jobs:
   # test11111111 before docker pull
   deploy:
@@ -20,21 +39,5 @@ jobs:
 
       - name: 📤 Деплой на сервер
         run: |
-          ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << 'EOF'
-            BRANCH_NAME="main"
-            cd /home/saylaww/library
-            git config --global --add safe.directory /home/saylaww/library
-            git remote -v
-            git fetch origin main
-            git reset --hard origin/main
-            docker-compose -f docker-compose.prod.yml pull
-            docker-compose -f docker-compose.prod.yml up -d --build
-            docker exec project_php php artisan migrate --force
-            docker exec project_php php artisan config:cache
-
-            docker exec project_php chmod -R 775 storage/api-docs
-            docker exec project_php chown -R saylaww:www-data storage/api-docs
-
-            docker exec project_php php artisan l5-swagger:generate
-          EOF
+          ssh -o StrictHostKeyChecking=no saylaww@176.96.243.188 << "/home/saylaww/library/deploy.sh"
 
