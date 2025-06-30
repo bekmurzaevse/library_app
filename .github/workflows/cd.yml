@@ -29,6 +29,7 @@ jobs:
             docker-compose -f docker-compose.prod.yml up -d --build
             docker exec project_php php artisan migrate --force
             docker exec project_php php artisan config:cache
+            docker exec project_php php artisan l5-swagger:generate
           EOF
         # run: |
         #   BRANCH=$(echo "${GITHUB_REF##*/}")

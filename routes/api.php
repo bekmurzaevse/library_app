@@ -19,7 +19,7 @@ Route::get('/user', function (Request $request) {
 })->middleware('auth:sanctum');
 
 Route::get('/test', function () {
-    return "3333";
+    return "4444";
 });
 
 
